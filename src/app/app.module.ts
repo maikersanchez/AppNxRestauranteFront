@@ -3,9 +3,6 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
-import { HomeComponent } from './home/home.component';
-import { CounterComponent } from './counter/counter.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { RegistroComponent } from './components/cliente/registro/registro.component';
 import { ListaComponent } from './components/cliente/lista/lista.component';
 import { LoadingComponent } from './components/shared/loading/loading.component';
@@ -38,9 +35,6 @@ import { ReporteComprasComponent } from './components/cliente/reporte-compras/re
   declarations: [
     AppComponent,
     NavMenuComponent,
-    HomeComponent,
-    CounterComponent,
-    FetchDataComponent,
     RegistroComponent,
     ListaComponent,
     LoadingComponent,

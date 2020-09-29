@@ -19,7 +19,6 @@ export const ROUTES: Routes = [
   { path: 'registro-cocinero', component: RegistroCocineroComponent },
   { path: 'app-reporte-ventas', component: ReporteVentasComponent },
   { path: 'cliente-reporte-compras', component: ReporteComprasComponent },
-  // { path: 'triki', component: TrikiComponent, canActivate: [AuthGuardService] },
   { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: '**', pathMatch: 'full', redirectTo: 'home' }
 ];
