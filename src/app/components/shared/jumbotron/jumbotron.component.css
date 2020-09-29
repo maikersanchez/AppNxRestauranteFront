@@ -1,0 +1,10 @@
+.jumbotron {
+    background-color: lightyellow;
+    color:black;
+    padding: 1rem 0.5rem;
+}
+@media (min-width: 576px){
+    .jumbotron {
+         padding: 0rem 0rem; 
+    }
+}

@@ -1,0 +1,49 @@
+<app-toast-global [mensajeSuccess]="mensajeSuccess" [mensajeStantard]="mensajeStantard" [mensajeDanger]="mensajeDanger"></app-toast-global>
+<app-jumbotron [titulo]="titulo" [subtitulo]="subtitulo"></app-jumbotron>
+<form [formGroup]="formCliente">
+  <div class="form-group">
+    <label for="identidadId">Identidad</label>
+    <input type="number" formControlName="IdCliente" id="identidadId" class="form-control" placeholder="Ingrese número de identidicacion">
+    <div *ngIf="submitted && f.IdCliente.errors">
+      <div *ngIf="f.IdCliente.errors.required" class="invalid-feedback">La identidad es un campo requerido</div>
+      <div *ngIf="f.IdCliente.errors.minlength" class="invalid-feedback">El tamaño mínimo es de 5 carácteres</div>
+      <div *ngIf="f.IdCliente.errors.minlength" class="invalid-feedback">El tamaño máximo es de 20 carácteres</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="nombreId">Nombre</label>
+    <input type="text" formControlName="VNombre" id="nombreId" class="form-control" placeholder="Ingrese nombre">
+    <div *ngIf="submitted && f.VNombre.errors">
+      <div *ngIf="f.VNombre.errors.required" class="invalid-feedback">El nombre es un campo requerido</div>
+      <div *ngIf="f.VNombre.errors.minlength" class="invalid-feedback">El tamaño mínimo es de 3 carácteres</div>
+      <div *ngIf="f.VNombre.errors.minlength" class="invalid-feedback">El tamaño máximo es de 20 carácteres</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="apellidoId">Primer Apellido</label>
+    <input type="text" formControlName="VApellido1" id="apellidoId" class="form-control" placeholder="Ingrese apellido">
+    <div *ngIf="submitted && f.VApellido1.errors">
+      <div *ngIf="f.VApellido1.errors.required" class="invalid-feedback">El apellido es un campo requerido</div>
+      <div *ngIf="f.VApellido1.errors.minlength" class="invalid-feedback">El tamaño mínimo es de 3 carácteres</div>
+      <div *ngIf="f.VApellido1.errors.minlength" class="invalid-feedback">El tamaño máximo es de 20 carácteres</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="apellidoId2">Segundo Apellido</label>
+    <input type="text" formControlName="VApellido2" id="apellidoId2" class="form-control" placeholder="Ingrese apellido">
+    <div *ngIf="submitted && f.VApellido2.errors">
+      <div *ngIf="f.VApellido2.errors.required" class="invalid-feedback">El apellido es un campo requerido</div>
+      <div *ngIf="f.VApellido2.errors.minlength" class="invalid-feedback">El tamaño mínimo es de 3 carácteres</div>
+      <div *ngIf="f.VApellido2.errors.minlength" class="invalid-feedback">El tamaño máximo es de 20 carácteres</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="observacionId">Observacion</label>
+    <textarea class="form-control form-control-sm" formControlName="VObservacion" id="observacionId" rows=3  placeholder="Ingrese observación">
+    </textarea>
+    <div *ngIf="submitted && f.VObservacion.errors">
+      <div *ngIf="f.VObservacion.errors.required" class="invalid-feedback">Ingrese observacion</div>
+    </div>
+  </div>
+<button type="submit" class="btn btn-primary" (click)="send()">Registrar</button>
+</form>

@@ -1,0 +1,32 @@
+<app-toast-global [mensajeSuccess]="mensajeSuccess" [mensajeStantard]="mensajeStantard" [mensajeDanger]="mensajeDanger"></app-toast-global>
+<app-jumbotron [titulo]="titulo" [subtitulo]="subtitulo"></app-jumbotron>
+<form [formGroup]="formMesa">
+  <div class="form-group">
+    <label for="identidadId">Mesa</label>
+    <input type="text" formControlName="IdMesa" id="mesaId" class="form-control" placeholder="Ingrese número de identificacion de mesa">
+    <div *ngIf="submitted && f.IdMesa.errors">
+      <div *ngIf="f.IdMesa.errors.required" class="invalid-feedback">Mesa es un campo requerido</div>
+      <div *ngIf="f.IdMesa.errors.minlength" class="invalid-feedback">El tamaño mínimo es de 1 carácteres</div>
+      <div *ngIf="f.IdMesa.errors.minlength" class="invalid-feedback">El tamaño máximo es de 20 carácteres</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="nombreId">Comensales</label>
+    <input type="number" formControlName="NMaxComensales" id="comensalesId" class="form-control" placeholder="Ingrese el numero máximo de comensales">
+    <div *ngIf="submitted && f.NMaxComensales.errors">
+      <div *ngIf="f.NMaxComensales.errors.required" class="invalid-feedback">El nombre es un campo requerido</div>
+      <div *ngIf="f.NMaxComensales.errors.minlength" class="invalid-feedback">El tamaño mínimo es de 3 carácteres</div>
+      <div *ngIf="f.NMaxComensales.errors.minlength" class="invalid-feedback">El tamaño máximo es de 20 carácteres</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="apellidoId">Ubicación</label>
+    <input type="text" formControlName="VUbicacion" id="apellidoId" class="form-control" placeholder="Descripcion de ubicacion de la mesa">
+    <div *ngIf="submitted && f.VUbicacion.errors">
+      <div *ngIf="f.VUbicacion.errors.required" class="invalid-feedback">La ubicación es un campo requerido</div>
+      <div *ngIf="f.VUbicacion.errors.minlength" class="invalid-feedback">El tamaño mínimo es de 3 carácteres</div>
+      <div *ngIf="f.VUbicacion.errors.minlength" class="invalid-feedback">El tamaño máximo es de 20 carácteres</div>
+    </div>
+  </div>
+<button type="submit" class="btn btn-primary" (click)="send()">Registrar</button>
+</form>

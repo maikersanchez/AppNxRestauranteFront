@@ -1,0 +1,179 @@
+<app-toast-global [mensajeSuccess]="mensajeSuccess" [mensajeStantard]="mensajeStantard" [mensajeDanger]="mensajeDanger"></app-toast-global>
+<app-jumbotron [titulo]="titulo" [subtitulo]="subtitulo"></app-jumbotron>
+<form [formGroup]="formFactura">
+    <div class="row">
+      <div class="form-group col-md-4">
+        <label for="clienteId">Cliente:</label>
+        <input id="clienteId"  formControlName="IdCliente" type="number" class="form-control" [class.is-invalid]="searchFailedCliente" [ngbTypeahead]="buscarCliente" (blur)="focusCliente$.next($any($event).target.value)" placeholder="Ingrese número de identidicación" />
+        <small *ngIf="searchingCliente" class="form-text text-muted">Buscando...</small>
+        <div class="invalid-feedback" *ngIf="searchFailedCliente">No se encontraron coincidencias</div>
+        <div *ngIf="submitted && f.IdCliente.errors">
+          <div *ngIf="f.IdCliente.errors.required" class="invalid-feedback">La identidad es un campo requerido</div>
+          <div *ngIf="f.IdCliente.errors.minlength" class="invalid-feedback">El tamaño mínimo es de 5 carácteres</div>
+          <div *ngIf="f.IdCliente.errors.minlength" class="invalid-feedback">El tamaño máximo es de 20 carácteres</div>
+        </div>
+      </div>
+
+      <div class="form-group col">
+        <label for="NombrelienteId">Nombre de cliente</label>
+        <input type="text"  formControlName="vClienteNombre" [(ngModel)]="modelNombreCliente" id="NombrelienteId" class="form-control" placeholder="Nombre del cliente" disabled />
+      </div>
+    </div>
+  
+  <div class="row">
+    <div class="form-group col-md-4">
+      <label for="IdCamarero">Identificación Camarero</label>
+      <input id="meseroId" formControlName="IdCamarero" type="number" class="form-control" [class.is-invalid]="searchFailedCamarero" [(ngModel)]="modelCamarero" [ngbTypeahead]="buscarCamarero" (blur)="focusCamarero$.next($any($event).target.value)" placeholder="Ingrese número de identidicación" />
+      <small *ngIf="searchingCamarero" class="form-text text-muted">Buscando...</small>
+      <div class="invalid-feedback" *ngIf="searchFailedCamarero">No se encontraron coincidencias</div>
+      <div *ngIf="submitted && f.IdCamarero.errors">
+        <div *ngIf="f.IdCamarero.errors.required" class="invalid-feedback">El nombre es un campo requerido</div>
+        <div *ngIf="f.IdCamarero.errors.minlength" class="invalid-feedback">El tamaño mínimo es de 3 carácteres</div>
+        <div *ngIf="f.IdCamarero.errors.minlength" class="invalid-feedback">El tamaño máximo es de 20 carácteres</div>
+      </div>
+    </div>
+    <div class="form-group col">
+      <label for="nombreCamareroId">Nombre del camarero</label>
+      <input type="text"  formControlName="vCamareroNombre" [(ngModel)]="modelNombreCamarero" id="nombreCamareroId" class="form-control" placeholder="Nombre del camarero" disabled />
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col">
+      <label for="mesaId">Mesa</label>
+      <input type="text" formControlName="IdMesa" id="mesaId" class="form-control" placeholder="Ingrese la mesa" [class.is-invalid]="searchFailedMesa" [(ngModel)]="modelMesa" [ngbTypeahead]="buscarMesa" >
+      <small *ngIf="searchingMesa" class="form-text text-muted">Buscando...</small>
+      <div class="invalid-feedback" *ngIf="searchFailedMesa">No se encontraron coincidencias</div>
+      <div *ngIf="submitted && f.IdMesa.errors">
+        <div *ngIf="f.IdMesa.errors.required" class="invalid-feedback">Mesa es un campo requerido</div>
+        <div *ngIf="f.IdMesa.errors.minlength" class="invalid-feedback">El tamaño mínimo es de 3 carácteres</div>
+        <div *ngIf="f.IdMesa.errors.minlength" class="invalid-feedback">El tamaño máximo es de 20 carácteres</div>
+      </div>
+    </div>
+    <div class="form-group col">
+      <div class="input-group">
+        <input class="form-control" placeholder="dd-mm-yyyy" formControlName="FFactura"
+             name="dp" [(ngModel)]="modelFFactura" ngbDatepicker #d="ngbDatepicker" id="fechaId"
+             [placement]="placement" [positionTarget]="buttonEl" [disabled]="disabledFFactura">
+        <div class="input-group-append">
+          <button #buttonEl class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+        </div>
+      </div>
+      <div *ngIf="submitted && f.FFactura.errors">
+        <div *ngIf="f.FFactura.errors.required" class="invalid-feedback">La fecha es un campo requerido</div>
+        <div *ngIf="f.FFactura.errors.minlength" class="invalid-feedback">El tamaño mínimo es de 3 carácteres</div>
+        <div *ngIf="f.FFactura.errors.minlength" class="invalid-feedback">El tamaño máximo es de 20 carácteres</div>
+      </div>
+    </div>
+
+    <div class="btn-toolbar d-flex h-100" role="toolbar" aria-label="Toolbar with button groups">
+      <div class="btn-group mr-2 align-self-center h-100" role="group" aria-label="First group">
+        <div class="form-group col">
+          <button type="submit" class="btn btn-primary btn-block" (click)="send()">Registrar</button>
+        </div>
+      </div>
+      <div class="btn-group mr-2 align-self-center h-100" role="group" aria-label="First group">
+        <div class="form-group col">
+          <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#modalDetalleFactura">Agregar Platos</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</form>
+
+
+<table class="table table-striped">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Cocinero</th>
+      <th scope="col">Nombre cocinero</th>
+      <th scope="col">Plato</th>
+      <th scope="col">Importe</th>
+      <th scope="col">Editar</th>
+      <th scope="col">Eliminar</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of collectionDetalleFactura; let i = index" [attr.data-index]="i">
+      <td>{{item.IdCocinero}}</td>
+      <td>{{item.vNombreCocinero}}</td>
+      <td>{{item.VPlato}}</td>
+      <td>{{item.DImporte}}</td>
+      <td><button type="button" class="btn btn-primary" (click)="editDetalleFactura(item, i)"  data-toggle="modal" data-target="#modalDetalleFactura"><span class="fa fa-edit" color="withe"></span> </button></td>
+      <td><button type="button" class="btn btn-danger" (click)="borrarListDetalle(i)" ><span class="fa fa-trash-alt" color="withe"></span> </button></td>
+    </tr>
+  </tbody>
+</table>
+<div class="d-flex justify-content-between p-2">
+  <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize" (pageChange)="refreshList()">
+  </ngb-pagination>
+
+  <select class="custom-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refreshList()">
+    <option [ngValue]="2">2 items per página</option>
+    <option [ngValue]="4">4 items per página</option>
+    <option [ngValue]="6">6 items per página</option>
+  </select>
+</div>
+
+
+<div class="modal fade" id="modalDetalleFactura" tabindex="-1" aria-labelledby="labelDetalleFactura" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="labelDetalleFactura">Ingresa Comanda</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="formDetalleFactura">
+          <div class="row">
+            <div class="form-group col-md-3">
+              <label for="clienteId">Cocinero:</label>
+              <input id="clienteId"  formControlName="IdCocinero" type="number" class="form-control" [class.is-invalid]="searchFailedCocinero" [ngbTypeahead]="buscarCocinero"  (blur)="focusCocinero$.next($any($event).target.value)" placeholder="Ingrese número de identidicación" />
+              <small *ngIf="searchingCocinero" class="form-text text-muted">Buscando...</small>
+              <div class="invalid-feedback" *ngIf="searchFailedCocinero">No se encontraron coincidencias</div>
+              <div *ngIf="submittedDetalle && fd.IdCocinero.errors">
+                <div *ngIf="fd.IdCocinero.errors.required" class="invalid-feedback">La identidad es un campo requerido</div>
+                <div *ngIf="fd.IdCocinero.errors.minlength" class="invalid-feedback">El tamaño mínimo es de 5 carácteres</div>
+                <div *ngIf="fd.IdCocinero.errors.minlength" class="invalid-feedback">El tamaño máximo es de 20 carácteres</div>
+              </div>
+            </div>
+      
+            <div class="form-group col">
+              <label for="NombreCocineroId">Nombre de cocinero</label>
+              <input type="text"  formControlName="vNombreCocinero" [(ngModel)]="modelNombreCocinero" id="NombreCocineroId" class="form-control" placeholder="Nombre cocinero" disabled />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="platoId" class="col-form-label">Plato:</label>
+            <input type="text" formControlName="VPlato" class="form-control" id="platoId">
+            <div *ngIf="submittedDetalle && fd.IdCocinero.errors">
+              <div *ngIf="fd.IdCocinero.errors.required" class="invalid-feedback">Plato es un campo requerido</div>
+              <div *ngIf="fd.IdCocinero.errors.minlength" class="invalid-feedback">El tamaño mínimo es de 5 carácteres</div>
+              <div *ngIf="fd.IdCocinero.errors.minlength" class="invalid-feedback">El tamaño máximo es de 20 carácteres</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="importeId" class="col-form-label">Precio:</label>
+            <input type="text" (keypress)="soloNumerosInput($event)" (blur)="transformTotal()" formControlName="DImporte" class="form-control" id="importeId">
+            <div *ngIf="submittedDetalle && fd.DImporte.errors">
+              <div *ngIf="fd.DImporte.errors.required" class="invalid-feedback">La identidad es un campo requerido</div>
+              <div *ngIf="fd.DImporte.errors.minlength" class="invalid-feedback">El tamaño mínimo es de 5 carácteres</div>
+              <div *ngIf="fd.DImporte.errors.minlength" class="invalid-feedback">El tamaño máximo es de 20 carácteres</div>
+            </div>
+          </div>
+          <!-- <div class="form-group">
+            <label for="message-text" class="col-form-label">Message:</label>
+            <textarea class="form-control" id="message-text"></textarea>
+          </div> -->
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancelarDetalleFactura">Cancelar</button>
+        <button type="button" class="btn btn-primary" (click)="guardarDetalleFactura()">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,24 @@
+<app-loading *ngIf="loading"></app-loading>
+<app-jumbotron [titulo]="titulo" [subtitulo]="subtitulo"></app-jumbotron>
+<table class="table">
+  <thead class="thead-dark table-striped">
+    <tr>
+      <th scope="col">Identicación</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Primer Apellido</th>
+      <th scope="col">Segundo Apellido</th>
+      <th scope="col">Observación</th>
+      <th scope="col">Eliminar</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of listClientes">
+      <td>{{item.idCliente}}</td>
+      <td>{{item.vNombre}}</td>
+      <td>{{item.vApellido1}}</td>
+      <td>{{item.vApellido2}}</td>
+      <td>{{item.vObservacion}}</td>
+      <td><button type="button" class="btn btn-danger" (click)="eliminarCliente(item)" ><span class="fa fa-trash-alt" color="withe"></span> </button></td>
+    </tr>
+  </tbody>
+</table>
